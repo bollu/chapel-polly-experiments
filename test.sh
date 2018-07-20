@@ -18,8 +18,3 @@ $LLC gpu.ll -o gpu.s
 gcc $CHPL_MAINO gpu.s  chpl_compilation_config.o\
     -ldl -lcudart $CHPL_LIBS  \
     -o gpu 
-
-
-#    -L/scratch/siddhart/gsoc2018/chapel-install/lib/chapel/1.18/runtime/lib/linux64/gnu/arch-native/loc-flat/comm-none/tasks-qthreads/tmr-generic/unwind-none/mem-jemalloc/atomics-intrinsics/hwloc/re2/fs-none \
-#    -lchpl 
- 

@@ -9,7 +9,10 @@ module matrix_multiplication {
 
   proc main(){
     var A:[0..5,0..5] real;
+    writeln ("array(BEFORE):\n", A);
     test(A);
+
+    writeln ("array(AFTER):\n", A);
   }
 }
 
