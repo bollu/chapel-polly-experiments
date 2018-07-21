@@ -1,1 +1,1 @@
-srun save/gpu
+srun cuda-memcheck ./save/out
