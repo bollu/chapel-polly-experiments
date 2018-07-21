@@ -13,7 +13,7 @@ cd save
 echo " ---"
 
 BUILD_GPU=0
-if [[$BUILD_GPU = 1]]; then
+if [[ $BUILD_GPU = 1 ]]; then
 #  polly
 $PO -S -polly-use-llvm-names \
     -polly-only-func=test_chpl \
