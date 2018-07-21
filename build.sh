@@ -12,6 +12,7 @@ chpl input.chpl --no-checks --llvm --savec=save
 cd save
 gcc $(/scratch/siddhart/gsoc2018/chapel/util/config/compileline --includes-and-defines) -c chpl_compilation_config.c 
 $PO -S -polly-canonicalize -instnamer chpl__module-nopt.bc > input.ll
+sed -i 's/polly_array_index/polly_array_index_2/g' input.ll 
 
 #  polly
 $PO -S -polly-use-llvm-names \
