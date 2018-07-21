@@ -23426,14 +23426,14 @@ bb24:                                             ; preds = %bb23, %bb24
   %tmp28 = getelementptr inbounds %ARRTY, %ARRTY* %tmp26, i64 0, i32 3, i64 0
   %tmp29 = load i64, i64* %tmp28, align 8, !tbaa !138
 
-  ;;; %tmp30 = call i64 @polly_array_index_2(i64 0, i64 %tmp29, i64 1, i64 %i, i64 %j)
-  %tmp30 = call i64 @polly_array_index_2(i64 0, i64 5, i64 1, i64 %i, i64 %j)
+  ;;; %ix = call i64 @polly_array_index_2(i64 0, i64 %tmp29, i64 1, i64 %i, i64 %j)
+  %ix = call i64 @polly_array_index_2(i64 0, i64 5, i64 1, i64 %i, i64 %j)
 
 
   %tmp31 = getelementptr inbounds %ARRTY, %ARRTY* %tmp26, i64 0, i32 7
   %tmp32 = load double*, double** %tmp31, align 8, !tbaa !231
-  %tmp33 = getelementptr inbounds double, double* %tmp32, i64 %tmp30
-  store double 4.000000e+01, double* %tmp33, align 8, !tbaa !111
+  %arr_at_ix = getelementptr inbounds double, double* %tmp32, i64 %ix
+  store double 4.000000e+01, double* %arr_at_ix, align 8, !tbaa !111
   %j.next = add nuw nsw i64 %j, 1
   %exitcond = icmp ne i64 %j.next, 5
   br i1 %exitcond, label %bb24, label %bb35
