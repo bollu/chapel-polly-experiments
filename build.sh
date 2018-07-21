@@ -11,6 +11,9 @@ CHPL_MAINO=$($CHPL_COMPILELINE --main.o)
 
 cd save
 echo " ---"
+
+BUILD_GPU=0
+if [[$BUILD_GPU = 1]]; then
 #  polly
 $PO -S -polly-use-llvm-names \
     -polly-only-func=test_chpl \
@@ -20,8 +23,12 @@ $PO -S -polly-use-llvm-names \
     -polly-ignore-aliasing \
     -polly-invariant-load-hoisting  \
     -polly-codegen-emit-rtc-print \
+    -polly-acc-dump-code \
     -polly-acc-dump-kernel-ir \
     -debug-only=polly-scops,polly-codegen-ppcg input.ll -o out.ll
+else
+    cp input.ll out.ll
+fi
 echo " ---"
 
 $LLC out.ll -o out.s 
