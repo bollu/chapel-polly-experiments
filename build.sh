@@ -8,10 +8,10 @@ CHPL_COMPILELINE=/scratch/siddhart/gsoc2018/chapel/util/config/compileline
 CHPL_LIBS=$($CHPL_COMPILELINE --libraries)
 CHPL_MAINO=$($CHPL_COMPILELINE --main.o)
 
-chpl affine_2d_init_2.chpl --no-checks --llvm --savec=save
+chpl input.chpl --no-checks --llvm --savec=save
 cd save
 gcc $(/scratch/siddhart/gsoc2018/chapel/util/config/compileline --includes-and-defines) -c chpl_compilation_config.c 
-$PO -S -polly-canonicalize -instnamer chpl__module-nopt.bc > affine_canonicalized_2d_init.ll
+$PO -S -polly-canonicalize -instnamer chpl__module-nopt.bc > input.ll
 
 #  polly
 $PO -S -polly-use-llvm-names \
@@ -22,9 +22,9 @@ $PO -S -polly-use-llvm-names \
     -polly-ignore-aliasing \
     -polly-invariant-load-hoisting  \
     -polly-codegen-emit-rtc-print \
-    -debug-only=polly-scops,polly-codegen-ppcg affine_canonicalized_2d_init.ll -o gpu.ll
+    -debug-only=polly-scops,polly-codegen-ppcg input.ll -o out.ll
 
-$LLC gpu.ll -o gpu.s 
-gcc $CHPL_MAINO gpu.s  chpl_compilation_config.o\
+$LLC out.ll -o out.s 
+gcc $CHPL_MAINO out.s  chpl_compilation_config.o\
     -ldl -lcudart $CHPL_LIBS -lGPURuntime -L$LLVM_LIBS_DIR \
-    -o gpu 
+    -o out 
