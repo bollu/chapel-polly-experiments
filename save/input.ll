@@ -23419,12 +23419,18 @@ bb23:                                             ; preds = %.split, %bb35
 
 bb24:                                             ; preds = %bb23, %bb24
   %j = phi i64 [ 0, %bb23 ], [ %j.next, %bb24 ]
+
   %tmp25 = getelementptr inbounds %ARRTY2, %ARRTY2* %arg, i64 0, i32 1
   %tmp26 = load %ARRTY*, %ARRTY** %tmp25, align 8, !tbaa !76
+
+
   %tmp27 = getelementptr inbounds %ARRTY, %ARRTY* %tmp26, i64 0, i32 3, i64 1
   store i64 1, i64* %tmp27, align 8, !tbaa !138
-  %tmp28 = getelementptr inbounds %ARRTY, %ARRTY* %tmp26, i64 0, i32 3, i64 0
-  %tmp29 = load i64, i64* %tmp28, align 8, !tbaa !138
+
+
+  ;; we don't need the stirde anymore
+  ;; %tmp28 = getelementptr inbounds %ARRTY, %ARRTY* %tmp26, i64 0, i32 3, i64 0
+  ;; %tmp29 = load i64, i64* %tmp28, align 8, !tbaa !138
 
   ;;; %ix = call i64 @polly_array_index_2(i64 0, i64 %tmp29, i64 1, i64 %i, i64 %j)
   %ix = call i64 @polly_array_index_2(i64 0, i64 5, i64 1, i64 %i, i64 %j)
